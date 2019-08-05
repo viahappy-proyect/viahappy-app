@@ -8,13 +8,6 @@ const bcrypt = require("bcrypt");
 const bcryptSalt = 10;
 
 
-function ensureAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) {
-    return next()
-  } else {
-    res.redirect('auth/login')
-  }
-}
 
 
 router.get("/login", (req, res, next) => {
@@ -61,13 +54,16 @@ router.post("/signup", (req, res, next) => {
       .catch(err => {
         res.render("auth/signup", { message: "Something went wrong" });
       })
-  });
-});
+  })
+})
 
-
-
-router.get('/profile', ensureAuthenticated, (req, res) => {
-  res.render('auth/profile', { user: req.user });
+router.get('/profile', (req, res) => {
+  if (req.isAuthenticated()) {
+    res.render('auth/profile', { user: req.user });
+  }
+  else {
+    res.redirect('login')
+  }
 });
 
 router.get("/logout", (req, res) => {

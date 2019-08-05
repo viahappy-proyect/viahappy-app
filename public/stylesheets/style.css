@@ -16,4 +16,17 @@ a {
 .make-acc {
   margin: 20px; }
 
+.previous-searches {
+  width: 40%; }
+
+.search-prev-btn {
+  width: 20%;
+  height: 50px; }
+
+.marg-bot {
+  margin-bottom: 15px; }
+
+.marg-left {
+  margin-left: 15px; }
+
 /*# sourceMappingURL=style.css.map */

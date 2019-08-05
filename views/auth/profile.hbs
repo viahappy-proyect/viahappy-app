@@ -1,24 +1,21 @@
 {{#with user}}
 <div class="container">
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-4 marg-bot">
       <p>Welcome {{username}}</p>
     </div>
 
-    <div class="col-md-6">
+    <div class="col-md-4 marg-bot">
       <label for="">Previous searches</label>
 
-      <select name="" class="form-control" id="">
-        <option>Seleccionar</option>
+      <select name="" class="form-control previous-searches" id="" aria-placeholder="Select">
+        <option>Select</option>
 
         <option></option>
 
       </select>
     </div>
-
-
-    <button type="submit" class="btn btn-dark">Search</button>
-
+    <button type="submit" class="btn btn-dark search-prev-btn marg-left">Search</button>
     </form>
     {{/with}}
   </div>
