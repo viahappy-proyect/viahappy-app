@@ -1,5 +1,5 @@
 const axios = require('axios')
-//const place = 0
+
 const yelp = {
 
     getHotels(city) {

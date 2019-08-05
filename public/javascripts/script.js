@@ -10,8 +10,60 @@ window.onload = () => {
 
     axios.get('http://localhost:3000/auth/api/search')
         .then(response => {
+            // extractCoordinates(response.data)
+            if (navigator.geolocation) {
 
-            locations = extractCoordinates(response.data)
+                navigator.geolocation.getCurrentPosition(function (position) {
+
+                    const center = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    };
+                    //console.log('center: ', center)
+
+                    let map = new google.maps.Map(document.getElementById('map'), {
+                        zoom: 13,
+                        center: center
+
+                    });
+
+                    let markers = locations.map(function (location, i) {
+                        return new google.maps.Marker({
+                            position: location,
+                            label: 'H'
+                        });
+                    });
+
+
+                    let markerCluster = new MarkerClusterer(map, markers,
+                        { imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m' });
+
+                },
+                    function () {
+                        // If something goes wrong
+                        console.log('Error in the geolocation service.');
+                    });
+            } else {
+
+                // console.log('center: ', center)
+                let map = new google.maps.Map(document.getElementById('map'), {
+                    zoom: 13,
+                    center: { lat: 40.3922949, lng: -3.6985541000000004 }
+
+                });
+
+                let markers = locations.map(function (location, i) {
+                    return new google.maps.Marker({
+                        position: location,
+                        label: 'H'
+                    });
+                });
+
+
+                let markerCluster = new MarkerClusterer(map, markers,
+                    { imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m' });
+
+            }
         })
         .catch(err => console.log(err))
 
@@ -35,59 +87,6 @@ window.onload = () => {
     }
 
 
-    // if (navigator.geolocation) {
-
-    //     navigator.geolocation.getCurrentPosition(function (position) {
-
-    //         const center = {
-    //             lat: position.coords.latitude,
-    //             lng: position.coords.longitude
-    //         };
-    //         //console.log('center: ', center)
-
-    //         let map = new google.maps.Map(document.getElementById('map'), {
-    //             zoom: 13,
-    //             center: center
-
-    //         });
-
-    //         let markers = locations.map(function (location, i) {
-    //             return new google.maps.Marker({
-    //                 position: location,
-    //                 label: 'H'
-    //             });
-    //         });
-
-
-    //         let markerCluster = new MarkerClusterer(map, markers,
-    //             { imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m' });
-
-    //     },
-    //         function () {
-    //             // If something goes wrong
-    //             console.log('Error in the geolocation service.');
-    //         });
-    // } else {
-
-    //     // console.log('center: ', center)
-    //     let map = new google.maps.Map(document.getElementById('map'), {
-    //         zoom: 13,
-    //         center: { lat: 40.3922949, lng: -3.6985541000000004 }
-
-    //     });
-
-    //     let markers = locations.map(function (location, i) {
-    //         return new google.maps.Marker({
-    //             position: location,
-    //             label: 'H'
-    //         });
-    //     });
-
-
-    //     let markerCluster = new MarkerClusterer(map, markers,
-    //         { imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m' });
-
-    // }
     // let locations = [{ lat: 40.42038, lng: -3.70459, title: 'Hotel Atlántico' },
     // { lat: 40.41445, lng: -3.7014, title: 'Me  by Melia' },
     // {

@@ -70,11 +70,12 @@ router.get('/profile', (req, res) => {
 
 router.get('/api/search', (req, res) => {
 
-  const city = req.query
+  const city = req.query.place
+
   yelp.getHotels(city)
     .then(response => {
       res.json(response.data)
-
+      console.log(response.data)
     }).catch(err => console.log(err))
 })
 
