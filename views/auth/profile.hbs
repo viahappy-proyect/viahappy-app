@@ -1,5 +1,5 @@
 {{#with user}}
-<div class="container">
+<div class="container container-marg-bot">
   <div class="row">
     <div class="col-md-4 marg-bot">
       <p>Welcome {{username}}</p>
@@ -16,7 +16,33 @@
       </select>
     </div>
     <button type="submit" class="btn btn-dark search-prev-btn marg-left">Search</button>
-    </form>
+
     {{/with}}
+  </div>
+</div>
+
+<hr>
+
+<div class="container marg-top">
+  <div class="row">
+    <div class="col-md-4">
+
+      <form action="/auth/api/search" method="GET" id="form-container">
+        <label for="place-input">
+          <h3>Enter City</h3>
+        </label>
+        <input class="form-control form-width" id="place-input" type="text" name="place" placeholder="City">
+
+        <br><br>
+
+        <button class="btn btn-sm btn-dark acc-btn form-width" type="submit">Search</button>
+
+      </form>
+
+
+    </div>
+    <div class="col-md-8">
+      <figure id="map"></figure>
+    </div>
   </div>
 </div>

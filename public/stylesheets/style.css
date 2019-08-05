@@ -7,6 +7,12 @@ nav {
 a {
   color: #00B7FF; }
 
+figure {
+  height: 500px; }
+
+h3 {
+  margin-bottom: 30px; }
+
 .acc-btn {
   margin-bottom: 20px; }
 
@@ -26,7 +32,16 @@ a {
 .marg-bot {
   margin-bottom: 15px; }
 
+.marg-top {
+  margin-top: 50px; }
+
 .marg-left {
   margin-left: 15px; }
+
+.container-marg-bot {
+  margin-bottom: 50px; }
+
+.form-width {
+  width: 40%; }
 
 /*# sourceMappingURL=style.css.map */

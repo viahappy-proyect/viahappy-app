@@ -1,5 +1,6 @@
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  //background-image: url('https://www.google.com/url?sa=i&source=images&cd=&ved=2ahUKEwiR6MDGy-vjAhXPzIUKHRNPAYMQjRx6BAgBEAQ&url=https%3A%2F%2Fsaigoneer.com%2Fexplore%2Fsponsored-listings-gold-silver%2F14579-novotel-phu-quoc-resort%2C-an-ideal-gateway-for-mice-tourists&psig=AOvVaw1Jb3KC69WQVBjwkUjpXTYt&ust=1565089661431340') no-repeat
 }
 
 nav{
@@ -8,6 +9,14 @@ nav{
 
 a {
   color: #00B7FF;
+}
+
+figure{
+  height: 500px;
+}
+
+h3{
+  margin-bottom: 30px
 }
 
 .acc-btn{
@@ -34,6 +43,19 @@ height: 50px
   margin-bottom: 15px
 }
 
+.marg-top{
+  margin-top: 50px
+}
+
 .marg-left{
   margin-left: 15px
 }
+
+.container-marg-bot{
+  margin-bottom: 50px
+}
+
+.form-width{
+  width: 40%
+}
+
