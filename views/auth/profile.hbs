@@ -4,22 +4,33 @@
     <div class="col-md-4 marg-bot">
       <p>Welcome {{username}}</p>
     </div>
+    {{/with}}
 
     <div class="col-md-4 marg-bot">
-      <label for="">Previous searches</label>
 
-      <select name="" class="form-control previous-searches" id="" aria-placeholder="Select">
-        <option>Select</option>
+      <label for="">
+        <p>Your searches</p>
+      </label>
+      <select name="prev-select-city" class="form-control previous-searches" id="select-prev-city"
+        aria-placeholder="Select">
 
-        <option></option>
+        {{#each user.search_id}}
+        <option value='{{this.zone}}'>{{this.zone}}</option>
+        {{/each}}
+
+      </select>
+      <select name="prev-select-business" class="form-control previous-searches" id="select-prev-business">
+
+        {{#each user.search_id}}
+        <option value='{{this.place}}'>{{this.place}}</option>
+        {{/each}}
 
       </select>
     </div>
-    <button type="submit" class="btn btn-dark search-prev-btn marg-left">Search</button>
-
-    {{/with}}
+    <button id="previous-search" type="submit" class="btn btn-dark search-prev-btn marg-left">Search</button>
   </div>
 </div>
+
 
 <hr>
 
@@ -32,9 +43,18 @@
         <h3>Enter City</h3>
       </label>
       <input class="form-control form-width" id="place-input" type="text" name="place" placeholder="City">
-
       <br><br>
+      <label for="form-control form-width">
+        <p>What are you looking for?</p>
+      </label>
 
+      <select name="select" class="form-control form-width" id="select-option">
+        <option value='hotel'>Hotels</option>
+        <option value='restaurant'>Restaurants</option>
+        <option value='cinema'>Cinemas</option>
+        <option value='hospital'>Hospitals</option>
+      </select>
+      <br><br>
       <button id="search" class="btn btn-sm btn-dark acc-btn form-width" type="submit">Search</button>
 
 
@@ -45,20 +65,7 @@
       <figure id="map"></figure>
     </div>
   </div>
-
-  {{!-- <div class="row">
-    <div class="col-md-4">
-      <form action="/auth/api/search-rest" method="get" id="form-container">
-        <label for="place-input">
-          <h3>Enter Restaurants</h3>
-        </label>
-        <input class="form-control form-width" id="place-input" type="text" name="place" placeholder="Restaurants">
-
-        <br><br>
-
-        <button id="search-rest" class="btn btn-sm btn-dark acc-btn form-width" type="submit">Search</button>
-
-      </form>
-    </div>
-  </div> --}}
 </div>
+{{!-- {{#each user.search_id}}
+{{this.place}}
+{{/each}} --}}

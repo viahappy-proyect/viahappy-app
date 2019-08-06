@@ -2,12 +2,16 @@
   <h2>Signup</h2>
 
   <form action="/auth/signup" method="POST" id="form-container">
-    <label for="username">Username</label>
+    <label for="username">
+      <p>Username</p>
+    </label>
     <input class="form-control" id="username" type="text" name="username" placeholder="user">
 
     <br><br>
 
-    <label for="password">Password</label>
+    <label for="password">
+      <p>Password</p>
+    </label>
     <input class="form-control" id="password" type="password" name="password" placeholder="pass">
     <br>
     {{#if message }}
