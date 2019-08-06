@@ -1,57 +1,31 @@
-
+const searchBtn = document.getElementById('search')
 
 window.onload = () => {
-    let locations = []
     let map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 13,
+        zoom: 10,
         center: { lat: 40.3922949, lng: -3.6985541000000004 }
 
     });
 
-    axios.get('http://localhost:3000/auth/api/search')
-        .then(response => {
-            // extractCoordinates(response.data)
-            if (navigator.geolocation) {
 
-                navigator.geolocation.getCurrentPosition(function (position) {
+    searchBtn.onclick = (e) => {
+        const city = document.getElementById("place-input").value
+        //console.log(city)
+        axios.get('http://localhost:3000/auth/api/search', { params: city })
 
-                    const center = {
-                        lat: position.coords.latitude,
-                        lng: position.coords.longitude
-                    };
-                    //console.log('center: ', center)
+            .then(response => {
+                //console.log(response.data)
+                let locations = extractCoordinates(response.data)
 
-                    let map = new google.maps.Map(document.getElementById('map'), {
-                        zoom: 13,
-                        center: center
-
-                    });
-
-                    let markers = locations.map(function (location, i) {
-                        return new google.maps.Marker({
-                            position: location,
-                            label: 'H'
-                        });
-                    });
-
-
-                    let markerCluster = new MarkerClusterer(map, markers,
-                        { imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m' });
-
-                },
-                    function () {
-                        // If something goes wrong
-                        console.log('Error in the geolocation service.');
-                    });
-            } else {
-
+                let center = findCenter(response.data)
+                //console.log(locations)
                 // console.log('center: ', center)
                 let map = new google.maps.Map(document.getElementById('map'), {
                     zoom: 13,
-                    center: { lat: 40.3922949, lng: -3.6985541000000004 }
+                    center: center
 
                 });
-
+                //{ lat: 40.3922949, lng: -3.6985541000000004 }
                 let markers = locations.map(function (location, i) {
                     return new google.maps.Marker({
                         position: location,
@@ -63,13 +37,13 @@ window.onload = () => {
                 let markerCluster = new MarkerClusterer(map, markers,
                     { imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m' });
 
-            }
-        })
-        .catch(err => console.log(err))
 
+            })
+            .catch(err => console.log(err))
 
+    }
     function extractCoordinates(hotels_found) {
-        let locations = []
+        let locationsCoordenates = []
         let latitude
         let longitude
         let count = 0
@@ -79,13 +53,21 @@ window.onload = () => {
             marker.lat = hotels_found.businesses[i].coordinates.latitude
             marker.lng = hotels_found.businesses[i].coordinates.longitude
             marker.title = hotels_found.businesses[i].name
-            locations.push(marker)
+            locationsCoordenates.push(marker)
             count++
         }
-        console.log(`A total of ${count} were found!!`)
-        return locations
+        //console.log(`A total of ${count} were found!!`)
+        //console.log(locations)
+        return locationsCoordenates
     }
 
+    function findCenter(hotels_found) {
+        center = {
+            lat: hotels_found.region.center.latitude,
+            lng: hotels_found.region.center.longitude
+        }
+        return center
+    }
 
     // let locations = [{ lat: 40.42038, lng: -3.70459, title: 'Hotel Atlántico' },
     // { lat: 40.41445, lng: -3.7014, title: 'Me  by Melia' },

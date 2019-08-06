@@ -27,17 +27,17 @@
   <div class="row">
     <div class="col-md-4">
 
-      <form action="/auth/api/search" method="GET" id="form-container">
-        <label for="place-input">
-          <h3>Enter City</h3>
-        </label>
-        <input class="form-control form-width" id="place-input" type="text" name="place" placeholder="City">
 
-        <br><br>
+      <label for="place-input">
+        <h3>Enter City</h3>
+      </label>
+      <input class="form-control form-width" id="place-input" type="text" name="place" placeholder="City">
 
-        <button class="btn btn-sm btn-dark acc-btn form-width" type="submit">Search</button>
+      <br><br>
 
-      </form>
+      <button id="search" class="btn btn-sm btn-dark acc-btn form-width" type="submit">Search</button>
+
+
 
 
     </div>
@@ -45,4 +45,20 @@
       <figure id="map"></figure>
     </div>
   </div>
+
+  {{!-- <div class="row">
+    <div class="col-md-4">
+      <form action="/auth/api/search-rest" method="get" id="form-container">
+        <label for="place-input">
+          <h3>Enter Restaurants</h3>
+        </label>
+        <input class="form-control form-width" id="place-input" type="text" name="place" placeholder="Restaurants">
+
+        <br><br>
+
+        <button id="search-rest" class="btn btn-sm btn-dark acc-btn form-width" type="submit">Search</button>
+
+      </form>
+    </div>
+  </div> --}}
 </div>
