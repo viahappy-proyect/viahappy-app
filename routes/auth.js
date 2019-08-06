@@ -2,19 +2,13 @@ const express = require("express");
 const passport = require('passport');
 const router = express.Router();
 const User = require("../models/User");
+const yelp = require('../public/javascripts/yelp')
 
 // Bcrypt to encrypt passwords
 const bcrypt = require("bcrypt");
 const bcryptSalt = 10;
 
 
-function ensureAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) {
-    return next()
-  } else {
-    res.redirect('auth/login')
-  }
-}
 
 
 router.get("/login", (req, res, next) => {
@@ -61,14 +55,49 @@ router.post("/signup", (req, res, next) => {
       .catch(err => {
         res.render("auth/signup", { message: "Something went wrong" });
       })
-  });
-});
+  })
+})
 
 
+router.get('/profile', (req, res) => {
+  if (req.isAuthenticated()) {
+    res.render('auth/profile', { user: req.user });
+  }
+  else {
+    res.redirect('login')
+  }
+})
 
-router.get('/profile', ensureAuthenticated, (req, res) => {
-  res.render('auth/profile', { user: req.user });
-});
+router.get('/api/search', (req, res) => {
+
+  const city = req.query["0"]
+
+  console.log(req.query["0"], "ciudad")
+
+  yelp.getHotels(city)
+    .then(response => {
+
+      res.json(response.data)
+    }).catch(err => console.log(err))
+})
+
+router.get("/logout", (req, res) => {
+  req.logout();
+  res.redirect("/");
+})
+
+router.get('/api/search-rest', (req, res) => {
+
+  const city = req.query.place
+
+  console.log(city)
+
+  yelp.getHotels(city)
+    .then(response => {
+      //console.log(response.data)
+      res.json(response.data)
+    }).catch(err => console.log(err))
+})
 
 router.get("/logout", (req, res) => {
   req.logout();
@@ -78,3 +107,31 @@ router.get("/logout", (req, res) => {
 
 
 module.exports = router;
+
+
+// router.get('/profile', (req, res) => {
+//   if (req.isAuthenticated()) {
+//     res.render('auth/profile', { user: req.user });
+//   }
+//   else {
+//     res.redirect('login')
+//   }
+// })
+
+
+// router.get('/profile', (req, res) => {
+//   if (req.isAuthenticated()) {
+//     yelp.getHotels()
+//       .then(respo => {
+//         console.log(respo)
+//         res.render('auth/profile', { user: req.user, respo })
+
+//       })
+//       .catch(err => console.log('error', err))
+//   }
+
+//   else {
+//     res.redirect('login')
+//   }
+
+// })

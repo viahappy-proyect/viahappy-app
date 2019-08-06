@@ -1,25 +1,64 @@
 {{#with user}}
-<div class="container">
+<div class="container container-marg-bot">
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-4 marg-bot">
       <p>Welcome {{username}}</p>
     </div>
 
-    <div class="col-md-6">
+    <div class="col-md-4 marg-bot">
       <label for="">Previous searches</label>
 
-      <select name="" class="form-control" id="">
-        <option>Seleccionar</option>
+      <select name="" class="form-control previous-searches" id="" aria-placeholder="Select">
+        <option>Select</option>
 
         <option></option>
 
       </select>
     </div>
+    <button type="submit" class="btn btn-dark search-prev-btn marg-left">Search</button>
 
-
-    <button type="submit" class="btn btn-dark">Search</button>
-
-    </form>
     {{/with}}
   </div>
+</div>
+
+<hr>
+
+<div class="container marg-top">
+  <div class="row">
+    <div class="col-md-4">
+
+
+      <label for="place-input">
+        <h3>Enter City</h3>
+      </label>
+      <input class="form-control form-width" id="place-input" type="text" name="place" placeholder="City">
+
+      <br><br>
+
+      <button id="search" class="btn btn-sm btn-dark acc-btn form-width" type="submit">Search</button>
+
+
+
+
+    </div>
+    <div class="col-md-8">
+      <figure id="map"></figure>
+    </div>
+  </div>
+
+  {{!-- <div class="row">
+    <div class="col-md-4">
+      <form action="/auth/api/search-rest" method="get" id="form-container">
+        <label for="place-input">
+          <h3>Enter Restaurants</h3>
+        </label>
+        <input class="form-control form-width" id="place-input" type="text" name="place" placeholder="Restaurants">
+
+        <br><br>
+
+        <button id="search-rest" class="btn btn-sm btn-dark acc-btn form-width" type="submit">Search</button>
+
+      </form>
+    </div>
+  </div> --}}
 </div>
