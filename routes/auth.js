@@ -4,6 +4,7 @@ const router = express.Router();
 const User = require("../models/User");
 const yelp = require('../public/javascripts/yelp')
 
+const Search = require('../models/searches.model')
 // Bcrypt to encrypt passwords
 const bcrypt = require("bcrypt");
 const bcryptSalt = 10;
@@ -59,8 +60,15 @@ router.post("/signup", (req, res, next) => {
 
 
 router.get('/profile', (req, res) => {
+
   if (req.isAuthenticated()) {
-    res.render('auth/profile', { user: req.user });
+    User.findById(req.user.id).populate('search_id')
+      .then(user => {
+
+        res.render('auth/profile', { user })
+      })
+
+
   }
   else {
     res.redirect('login')
@@ -73,10 +81,24 @@ router.get('/api/search', (req, res) => {
 
   const business = req.query.business
 
+  const userId = req.user._id
+
   yelp.getHotels(city, business)
     .then(response => {
       // console.log(business)
       res.json(response.data)
+
+
+      Search.create({ user_id: userId, zone: city, place: business })
+        // .populate('user_id')
+        .then(search => {
+          User.findByIdAndUpdate(userId, { $push: { search_id: search._id } })
+            .then(user => console.log(user))
+
+        })
+        .catch(err => console.log('Hubo un error:', err))
+
+
     }).catch(err => console.log(err))
 
 
