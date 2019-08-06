@@ -10,7 +10,6 @@ const bcryptSalt = 10;
 
 
 
-
 router.get("/login", (req, res, next) => {
   res.render("auth/login", { "message": req.flash("error") });
 });
@@ -70,33 +69,17 @@ router.get('/profile', (req, res) => {
 
 router.get('/api/search', (req, res) => {
 
-  const city = req.query["0"]
+  const city = req.query.city
 
-  console.log(req.query["0"], "ciudad")
+  const business = req.query.business
 
-  yelp.getHotels(city)
+  yelp.getHotels(city, business)
     .then(response => {
-
+      // console.log(business)
       res.json(response.data)
     }).catch(err => console.log(err))
-})
 
-router.get("/logout", (req, res) => {
-  req.logout();
-  res.redirect("/");
-})
 
-router.get('/api/search-rest', (req, res) => {
-
-  const city = req.query.place
-
-  console.log(city)
-
-  yelp.getHotels(city)
-    .then(response => {
-      //console.log(response.data)
-      res.json(response.data)
-    }).catch(err => console.log(err))
 })
 
 router.get("/logout", (req, res) => {
