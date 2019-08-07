@@ -78,17 +78,16 @@ router.get('/profile', (req, res) => {
 router.get('/api/search', (req, res) => {
 
   const city = req.query.city
-
   const business = req.query.business
-
   const userId = req.user._id
+
 
   yelp.getHotels(city, business)
     .then(response => {
       // console.log(business)
       res.json(response.data)
 
-
+      console.log(response.data.id)
       Search.create({ user_id: userId, zone: city, place: business })
         // .populate('user_id')
         .then(search => {
@@ -102,6 +101,22 @@ router.get('/api/search', (req, res) => {
     }).catch(err => console.log(err))
 
 
+})
+
+router.get('/lookups', (req, res) => {
+
+  if (req.isAuthenticated()) {
+    User.findById(req.user.id).populate('search_id')
+      .then(user => {
+
+        res.render('auth/lookups', { user })
+      })
+
+
+  }
+  else {
+    res.redirect('login')
+  }
 })
 
 router.get("/logout", (req, res) => {
