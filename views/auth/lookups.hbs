@@ -1,7 +1,7 @@
 {{#with user}}
 <div class="container container-marg-bot">
 
-    <p>Welcome {{username}}, here you can look for your previous researches and more info</p>
+    <p>Welcome {{username}}, here you can look for your previous researches and more info:</p>
     {{/with}}
 
     <div class="row">
@@ -13,6 +13,8 @@
                     <button id="searches-btns" type="submit" class="searches-btns">{{this.place}}s in
                         {{this.zone}}</button>
                 </li>
+                {{else}}
+                <p>You got no searches yet <a href="profile">Make one!</a></p>
                 {{/each}}
             </ul>
 

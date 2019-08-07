@@ -1,13 +1,19 @@
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   background: rgba($color: #31a091, $alpha: .9) url('../images/resort.png') no-repeat center /cover;
-  color: whitesmoke;
-  text-shadow: 2px 2px 0 rgba(128, 128, 128, .4)
 }
 
+h1,h2,h3,p{
+  color: whitesmoke;
+  text-shadow: 4px 4px 0 rgba(61, 61, 61, 0.4)
+}
+
+.back-lookups p{
+text-shadow: 0 0
+}
 p{
   font-size: 1.5em;
-  color: whitesmoke
+
 }
 
 nav{
@@ -22,6 +28,13 @@ nav a{
 
 .logo{
   font-size: 2.7em
+}
+
+.img-profile{
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  margin-left: 15px
 }
 
 li{
@@ -91,11 +104,23 @@ height: 50px
 border: 2px solid black;
 border-radius: 10%;
 background-color: rgba($color: #fdffffb9, $alpha: .5);
-margin: 0 5px
+margin-right: 15px;
+}
+
+.researches-cont p{
+  color: black
 }
 
 .searches-btns{
  border: none;
  background-color: rgba($color: #31a091, $alpha: .0);
  font-size: 1.5em
+}
+
+.box-size{
+  height: 38px;
+}
+
+.form-upload-width{
+  width: 30%
 }
