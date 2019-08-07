@@ -1,33 +1,11 @@
 {{#with user}}
-<div class="container container-marg-bot">
+<div class="container">
   <div class="row">
-    <div class="col-md-4 marg-bot">
+    <div class="col-md-4">
       <p>Welcome {{username}}</p>
     </div>
     {{/with}}
 
-    {{!-- <div class="col-md-4 marg-bot">
-
-      <label for="">
-        <p>Your searches</p>
-      </label>
-      <select name="prev-select-city" class="form-control previous-searches" id="select-prev-city"
-        aria-placeholder="Select">
-
-        {{#each user.search_id}}
-        <option value='{{this.zone}}'>{{this.zone}}</option>
-        {{/each}}
-
-      </select>
-      <select name="prev-select-business" class="form-control previous-searches" id="select-prev-business">
-
-        {{#each user.search_id}}
-        <option value='{{this.place}}'>{{this.place}}</option>
-        {{/each}}
-
-      </select>
-    </div>
-    <button id="previous-search" type="submit" class="btn btn-dark search-prev-btn marg-left">Search</button> --}}
   </div>
 </div>
 
@@ -69,3 +47,25 @@
 {{!-- {{#each user.search_id}}
 {{this.place}}
 {{/each}} --}}
+{{!-- <div class="col-md-4 marg-bot">
+
+      <label for="">
+        <p>Your searches</p>
+      </label>
+      <select name="prev-select-city" class="form-control previous-searches" id="select-prev-city"
+        aria-placeholder="Select">
+
+        {{#each user.search_id}}
+        <option value='{{this.zone}}'>{{this.zone}}</option>
+        {{/each}}
+
+      </select>
+      <select name="prev-select-business" class="form-control previous-searches" id="select-prev-business">
+
+        {{#each user.search_id}}
+        <option value='{{this.place}}'>{{this.place}}</option>
+        {{/each}}
+
+      </select>
+    </div>
+    <button id="previous-search" type="submit" class="btn btn-dark search-prev-btn marg-left">Search</button> --}}
