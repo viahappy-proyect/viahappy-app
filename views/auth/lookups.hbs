@@ -1,0 +1,26 @@
+{{#with user}}
+<div class="container container-marg-bot">
+
+    <p>Welcome {{username}}, here you can look for your previous researches and more info</p>
+    {{/with}}
+
+    <div class="row">
+        <div class="col-md-4 researches-cont">
+
+            <ul>
+                {{#each user.search_id}}
+                <li>
+                    <button id="searches-btns" type="submit" class="searches-btns">{{this.place}}s in
+                        {{this.zone}}</button>
+                </li>
+                {{/each}}
+            </ul>
+
+        </div>
+
+        <div class="col-md-6 researches-cont">
+
+        </div>
+
+    </div>
+</div>

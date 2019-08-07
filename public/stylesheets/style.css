@@ -1,17 +1,33 @@
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background: url("../images/resort.jpg") no-repeat; }
+  background: rgba(49, 160, 145, 0.9) url("../images/resort.png") no-repeat center/cover;
+  color: whitesmoke;
+  text-shadow: 2px 2px 0 rgba(128, 128, 128, 0.4); }
 
 p {
   font-size: 1.5em;
-  color: black; }
+  color: whitesmoke; }
 
 nav {
   margin-bottom: 30px;
-  height: 100px; }
+  height: 80px;
+  text-shadow: 2px 2px 0 rgba(128, 128, 128, 0); }
+
+nav a {
+  font-size: 1.5em; }
+
+.logo {
+  font-size: 2.7em; }
+
+li {
+  list-style-type: none;
+  line-height: 2.3em; }
+
+ul a {
+  color: white; }
 
 a {
-  color: #00B7FF; }
+  color: #d3dee2; }
 
 figure {
   height: 500px; }
@@ -50,5 +66,16 @@ h3 {
 
 .form-width {
   width: 50%; }
+
+.researches-cont {
+  border: 2px solid black;
+  border-radius: 10%;
+  background-color: rgba(253, 255, 255, 0.5);
+  margin: 0 5px; }
+
+.searches-btns {
+  border: none;
+  background-color: rgba(49, 160, 145, 0);
+  font-size: 1.5em; }
 
 /*# sourceMappingURL=style.css.map */
