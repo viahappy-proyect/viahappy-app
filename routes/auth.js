@@ -204,9 +204,6 @@ router.get("/logout", (req, res) => {
 
 
 
-module.exports = router;
-
-
 // router.get('/profile', (req, res) => {
 //   if (req.isAuthenticated()) {
 //     res.render('auth/profile', { user: req.user });
@@ -233,3 +230,5 @@ module.exports = router;
 //   }
 
 // })
+
+module.exports = router;
