@@ -1,9 +1,12 @@
 const express = require("express");
 const passport = require('passport');
 const router = express.Router();
+const multer = require('multer')
+const uploadCloud = require('../config/cloudinary.config.js')
 const User = require("../models/User");
 const yelp = require('../public/javascripts/yelp')
 const Bussineses = require('../models/bussineses.model')
+const upload = multer({ dest: '../public/uploads/' })
 const Search = require('../models/searches.model')
 // Bcrypt to encrypt passwords
 const bcrypt = require("bcrypt");
@@ -26,9 +29,11 @@ router.get("/signup", (req, res, next) => {
   res.render("auth/signup");
 });
 
-router.post("/signup", (req, res, next) => {
+router.post("/signup", uploadCloud.single('photo'), (req, res, next) => {
   const username = req.body.username;
   const password = req.body.password;
+  const imgPath = req.file.url
+  const imgName = req.file.originalname
   if (username === "" || password === "") {
     res.render("auth/signup", { message: "Indicate username and password" });
     return;
@@ -45,7 +50,9 @@ router.post("/signup", (req, res, next) => {
 
     const newUser = new User({
       username,
-      password: hashPass
+      password: hashPass,
+      imgPath,
+      imgName
     });
 
     newUser.save()
@@ -79,6 +86,7 @@ router.get('/api/search', (req, res) => {
 
   const city = req.query.city
   const business = req.query.business
+
   const userId = req.user._id
 
 
@@ -87,6 +95,7 @@ router.get('/api/search', (req, res) => {
   yelp.getHotels(city, business)
     .then(response => {
       res.json(response.data)
+      console.log(req)
 
       Search.findOne({zone: city, place: business})
         .then(encontrados => {
@@ -191,6 +200,7 @@ router.get("/logout", (req, res) => {
   req.logout();
   res.redirect("/");
 })
+
 
 
 

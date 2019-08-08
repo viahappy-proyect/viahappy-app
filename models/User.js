@@ -4,8 +4,10 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
   username: String,
   password: String,
+  bussineses_id: [{ type: Schema.Types.ObjectId, ref: 'Bussineses' }],
   search_id: [{ type: Schema.Types.ObjectId, ref: 'Search' }],
-  bussineses_id: [{ type: Schema.Types.ObjectId, ref: 'Bussineses' }]
+  imgName: String,
+  imgPath: String,
 
 }, {
     timestamps: {

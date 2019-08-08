@@ -1,7 +1,7 @@
 <div class="container">
   <h2>Signup</h2>
 
-  <form action="/auth/signup" method="POST" id="form-container">
+  <form action="/auth/signup" method="POST" id="form-container" enctype="multipart/form-data">
     <label for="username">
       <p>Username</p>
     </label>
@@ -13,14 +13,25 @@
       <p>Password</p>
     </label>
     <input class="form-control" id="password" type="password" name="password" placeholder="pass">
-    <br>
+
+    <br><br>
+
+    <p>Upload a photo</p>
+    <div class="input-group">
+      <div class="custom-file">
+        <input name="photo" type="file" class="custom-file-input" id="inputGroupFile01"
+          aria-describedby="inputGroupFileAddon01">
+        <label class="custom-file-label form-upload-width" for="inputGroupFile01">Choose file</label>
+      </div>
+    </div>
+
     {{#if message }}
     <div class="error-message alert alert-danger" role="alert">{{ message }}</div>
     {{/if}}
 
     <br><br>
 
-    <button class="btn btn-sm btn-dark acc-btn">Create account</button>
+    <button class="btn btn-sm acc-btn btn-info">Create account</button>
 
     <p class="account-message">
       Do you already have an account?
