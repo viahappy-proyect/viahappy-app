@@ -12,6 +12,9 @@ h1, h2, h3, p {
 p {
   font-size: 1.5em; }
 
+.non-shadow {
+  text-shadow: 0 0; }
+
 nav {
   margin-bottom: 30px;
   height: 80px;
