@@ -1,1 +1,30 @@
-<h1>Search details</h1>
+<section>
+    <div class="container">
+        <p class="non-shadow"><a href="/auth/lookups">Go Back</a></p>
+
+        <h2 class="marg-bot">Detailed Search</h2>
+        <hr class="marg-bot">
+        <div class="row">
+            {{#each bussineses}}
+            <div class="col-md-6 bord marg-bot ali">
+                <ul>
+                    <li>
+                        <h4 class="marg-bot">{{name}}</h4>
+                    </li>
+                    <li>
+                        <img class="img-bus marg-bot" src={{image_url}} alt="{{name}}">
+                    </li>
+                    <li>
+                        <p>Phone: {{phone}}</p>
+                    </li>
+                    <li>
+                        <p>Rating: {{rating}}</p>
+                    </li>
+                </ul>
+
+            </div>
+            {{/each}}
+        </div>
+
+    </div>
+</section>

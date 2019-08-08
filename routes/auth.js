@@ -90,64 +90,67 @@ router.get('/api/search', (req, res) => {
   const userId = req.user._id
 
 
-  let name; let image_url;let latitude; let longitude; let  phone; let rating; let price
-  
+  let name; let image_url; let latitude; let longitude; let phone; let rating; let price
+
   yelp.getHotels(city, business)
     .then(response => {
       res.json(response.data)
-      console.log(req)
+      // console.log(req)
 
-      Search.findOne({zone: city, place: business})
+      Search.findOne({ zone: city, place: business })
         .then(encontrados => {
-          
-              if (!encontrados){
-                Search.create({ user_id: userId, zone: city, place: business})
-          
-                // .populate('user_id')
-                .then(search => {
-                  User.findByIdAndUpdate(userId, { $push: { search_id: search._id } })
-                    .then(user => {
-                    
-                      response.data.businesses.forEach(x => {
-                        name = x.name
-                        image_url = x.image_url
-                        latitude = x.coordinates.latitude
-                        longitude = x.coordinates.longitude
-                        phone = x.phone
-                        rating = x.rating
-                        price = x.price
-                       
-                        Bussineses.create({ user_id: user._id, search_id: search._id, name, 
-                          image_url, latitude, longitude, phone, rating, price})
-                          // .populate('user_id')
-                          .then(bussineses => {
-                            // console.log(bussineses)
-                            
-                            User.findByIdAndUpdate(user._id, { $push: { bussineses_id: bussineses._id } })
+          console.log(encontrados)
+          if (encontrados === null) {
+            Search.create({ user_id: userId, zone: city, place: business })
+
+              // .populate('user_id')
+              .then(search => {
+                console.log(search)
+                User.findByIdAndUpdate(userId, { $push: { search_id: search._id } })
+                  .then(user => {
+
+                    response.data.businesses.forEach(x => {
+                      name = x.name
+                      image_url = x.image_url
+                      latitude = x.coordinates.latitude
+                      longitude = x.coordinates.longitude
+                      phone = x.phone
+                      rating = x.rating
+                      price = x.price
+
+                      Bussineses.create({
+                        user_id: user._id, search_id: search._id, name,
+                        image_url, latitude, longitude, phone, rating, price
+                      })
+                        // .populate('user_id')
+                        .then(bussineses => {
+                          // console.log(bussineses)
+
+                          User.findByIdAndUpdate(user._id, { $push: { bussineses_id: bussineses._id } })
                             // .populate('user_id')
                             .then(user => console.log(user))
-                            // Search.findByIdAndUpdate(searchId, { $push: { bussineses_id: bussineses_id } })
-                            //   .then(user => console.log(user))
-                  
-                          })
-                          // .catch(err => console.log('Hubo un error:', err))
-          
-          
-                    })
-          
-                })
-                .catch(err => console.log('Hubo un error:', err))
-          
-          
-                    
-                })
-        
-              }
+                          // Search.findByIdAndUpdate(searchId, { $push: { bussineses_id: bussineses_id } })
+                          //   .then(user => console.log(user))
 
-        }  )
-         
-    
-    
+                        })
+                      // .catch(err => console.log('Hubo un error:', err))
+
+
+                    })
+
+                  })
+                  .catch(err => console.log('Hubo un error:', err))
+
+
+
+              })
+
+          }
+
+        })
+
+
+
 
     }).catch(err => console.log(err))
 
@@ -162,7 +165,7 @@ router.get('/lookups', (req, res) => {
 
         res.render('auth/lookups', { user })
       })
-     
+
   }
   else {
     res.redirect('login')
@@ -171,10 +174,19 @@ router.get('/lookups', (req, res) => {
 
 router.get('/lookups/:id', (req, res, next) => {
   const searchId = req.params.id
+
   Search.findById(searchId)
-  .populate('bussineses_id')
-  .then(searches => res.render('auth/search-details'), {search: searches})
-  .catch(err => console.log('err', err))
+    // .populate('bussineses_id')
+    .then(search => {
+
+      Bussineses.find({ search_id: search._id })
+        .then(bussineses => {
+          console.log(bussineses)
+          res.render('auth/search-details', { search, bussineses })
+        })
+
+    })
+    .catch(err => console.log('err', err))
 })
 //*
 // outer.post('/lookups', (req, res) => {
