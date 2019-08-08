@@ -6,7 +6,7 @@ const uploadCloud = require('../config/cloudinary.config.js')
 const User = require("../models/User");
 const yelp = require('../public/javascripts/yelp')
 const Bussineses = require('../models/bussineses.model')
-const upload = multer({ dest: '../public/uploads/' })
+// const upload = multer({ dest: '../public/uploads/' })
 const Search = require('../models/searches.model')
 // Bcrypt to encrypt passwords
 const bcrypt = require("bcrypt");
