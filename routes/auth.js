@@ -3,7 +3,7 @@ const passport = require('passport');
 const router = express.Router();
 const User = require("../models/User");
 const yelp = require('../public/javascripts/yelp')
-
+const Bussineses = require('../models/bussineses.model')
 const Search = require('../models/searches.model')
 // Bcrypt to encrypt passwords
 const bcrypt = require("bcrypt");
@@ -82,21 +82,63 @@ router.get('/api/search', (req, res) => {
   const userId = req.user._id
 
 
+  let name; let image_url;let latitude; let longitude; let  phone; let rating; let price
+  
   yelp.getHotels(city, business)
     .then(response => {
-      // console.log(business)
       res.json(response.data)
 
-      console.log(response.data.id)
-      Search.create({ user_id: userId, zone: city, place: business })
-        // .populate('user_id')
-        .then(search => {
-          User.findByIdAndUpdate(userId, { $push: { search_id: search._id } })
-            .then(user => console.log(user))
+      Search.findOne({zone: city, place: business})
+        .then(encontrados => {
+          
+              if (!encontrados){
+                Search.create({ user_id: userId, zone: city, place: business})
+          
+                // .populate('user_id')
+                .then(search => {
+                  User.findByIdAndUpdate(userId, { $push: { search_id: search._id } })
+                    .then(user => {
+                    
+                      response.data.businesses.forEach(x => {
+                        name = x.name
+                        image_url = x.image_url
+                        latitude = x.coordinates.latitude
+                        longitude = x.coordinates.longitude
+                        phone = x.phone
+                        rating = x.rating
+                        price = x.price
+                       
+                        Bussineses.create({ user_id: user._id, search_id: search._id, name, 
+                          image_url, latitude, longitude, phone, rating, price})
+                          // .populate('user_id')
+                          .then(bussineses => {
+                            // console.log(bussineses)
+                            
+                            User.findByIdAndUpdate(user._id, { $push: { bussineses_id: bussineses._id } })
+                            // .populate('user_id')
+                            .then(user => console.log(user))
+                            // Search.findByIdAndUpdate(searchId, { $push: { bussineses_id: bussineses_id } })
+                            //   .then(user => console.log(user))
+                  
+                          })
+                          // .catch(err => console.log('Hubo un error:', err))
+          
+          
+                    })
+          
+                })
+                .catch(err => console.log('Hubo un error:', err))
+          
+          
+                    
+                })
+        
+              }
 
-        })
-        .catch(err => console.log('Hubo un error:', err))
-
+        }  )
+         
+    
+    
 
     }).catch(err => console.log(err))
 
@@ -106,18 +148,44 @@ router.get('/api/search', (req, res) => {
 router.get('/lookups', (req, res) => {
 
   if (req.isAuthenticated()) {
-    User.findById(req.user.id).populate('search_id')
+    User.findById(req.user.id).populate('search_id').populate('bussineses_id')
       .then(user => {
 
         res.render('auth/lookups', { user })
       })
-
-
+     
   }
   else {
     res.redirect('login')
   }
 })
+
+router.get('/lookups/:id', (req, res, next) => {
+  const searchId = req.params.id
+  Search.findById(searchId)
+  .populate('bussineses_id')
+  .then(searches => res.render('auth/search-details'), {search: searches})
+  .catch(err => console.log('err', err))
+})
+//*
+// outer.post('/lookups', (req, res) => {
+
+//   if (req.isAuthenticated()) {
+//     User.findById(req.user.id).populate('search_id')
+//       .then(user => {
+
+//         res.render('auth/lookups', { user })
+//       })
+
+
+//   }
+//   else {
+//     res.redirect('login')
+//   }
+// })
+
+
+//
 
 router.get("/logout", (req, res) => {
   req.logout();

@@ -4,7 +4,9 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
   username: String,
   password: String,
-  search_id: [{ type: Schema.Types.ObjectId, ref: 'Search' }]
+  search_id: [{ type: Schema.Types.ObjectId, ref: 'Search' }],
+  bussineses_id: [{ type: Schema.Types.ObjectId, ref: 'Bussineses' }]
+
 }, {
     timestamps: {
       createdAt: 'created_at',

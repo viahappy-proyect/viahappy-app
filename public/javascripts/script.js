@@ -11,11 +11,13 @@ window.onload = () => {
     searchBtn.onclick = () => {
         const city = document.getElementById("place-input").value
         const business = document.getElementById('select-option').value
-
+       
         axios.get('http://localhost:3000/auth/api/search', { params: { city, business } })
 
             .then(response => {
-                //console.log(response.data)
+                console.log("hollllaaaa")
+                console.log('yelp response.data',response.data)
+
                 let locations = extractCoordinates(response.data)
 
                 let center = findCenter(response.data)
@@ -33,7 +35,8 @@ window.onload = () => {
                     });
                 });
 
-
+                let names = extractNames(response.data)
+                
                 let markerCluster = new MarkerClusterer(map, markers,
                     { imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m' });
 
@@ -59,6 +62,19 @@ window.onload = () => {
         //console.log(`A total of ${count} were found!!`)
         //console.log(locations)
         return locationsCoordenates
+    }
+
+    function extractNames(hotels_found) {
+        let locationsNames = []
+        let count = 0
+        let name
+        for (let i = 0; i < hotels_found.businesses.length; i++) {
+            locationsNames.push(hotels_found.businesses[i].name)
+            count++
+        }
+        //console.log(`A total of ${count} were found!!`)
+        //console.log(locations)
+        return locationsNames
     }
 
     function findCenter(hotels_found) {
