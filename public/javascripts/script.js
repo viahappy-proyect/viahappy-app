@@ -12,7 +12,7 @@ window.onload = () => {
         const city = document.getElementById("place-input").value
         const business = document.getElementById('select-option').value
        
-        axios.get('http://localhost:3000/auth/api/search', { params: { city, business } })
+        axios.get('https://viahappy.herokuapp.com/auth/api/search', { params: { city, business } })
 
             .then(response => {
                 console.log("hollllaaaa")
