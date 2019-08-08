@@ -10,7 +10,7 @@
             <ul>
                 {{#each user.search_id}}
                 <li>
-                    <button id="" type="submit" class="searches-btns">{{this.place}}s in  {{this.zone}}</button>
+                    <a href="/auth/lookups/{{this._id}}" class="searches-btns">{{this.place}}s in {{this.zone}}</a>
                 </li>
                 {{else}}
                 <p class="non-shadow">You got no searches yet <a href="profile">Make one!</a></p>
@@ -32,5 +32,4 @@
         </div>
 
     </div> --}}
-</div>
-
+    </div>

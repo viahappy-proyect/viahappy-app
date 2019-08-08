@@ -2,9 +2,18 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   background: rgba(49, 160, 145, 0.9) url("../images/resort.png") no-repeat center/cover; }
 
+section {
+  background: #84c8e7; }
+
+section li {
+  text-shadow: 2px 2px 0 rgba(61, 61, 61, 0.4); }
+
 h1, h2, h3, p {
   color: whitesmoke;
   text-shadow: 4px 4px 0 rgba(61, 61, 61, 0.4); }
+
+h4 {
+  color: black; }
 
 .back-lookups p {
   text-shadow: 0 0; }
@@ -36,11 +45,8 @@ li {
   list-style-type: none;
   line-height: 2.3em; }
 
-ul a {
-  color: white; }
-
 a {
-  color: #d3dee2; }
+  color: black; }
 
 figure {
   height: 500px; }
@@ -99,5 +105,25 @@ h3 {
 
 .form-upload-width {
   width: 30%; }
+
+.img-bus {
+  width: 20%; }
+
+.flex {
+  flex-wrap: wrap; }
+
+.row p {
+  text-shadow: 0 0; }
+
+hr {
+  color: #383636;
+  height: 5px; }
+
+.bord {
+  border-bottom: 2px solid; }
+
+p a {
+  color: white;
+  text-shadow: 2px 2px 0 rgba(61, 61, 61, 0.4); }
 
 /*# sourceMappingURL=style.css.map */

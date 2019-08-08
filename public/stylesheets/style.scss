@@ -1,11 +1,24 @@
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background: rgba($color: #31a091, $alpha: .9) url('../images/resort.png') no-repeat center /cover;
+  background: rgba($color: #31a091, $alpha: .9) url('../images/resort.png') no-repeat center / cover ;
+}
+
+section{
+  background: rgb(132, 200, 231)
+}
+
+section li{
+  text-shadow: 2px 2px 0 rgba(61, 61, 61, 0.4)
 }
 
 h1,h2,h3,p{
   color: whitesmoke;
   text-shadow: 4px 4px 0 rgba(61, 61, 61, 0.4)
+}
+
+h4{
+  color:black
+
 }
 
 .back-lookups p{
@@ -46,12 +59,8 @@ li{
   line-height: 2.3em
 }
 
-ul a{
-  color: white;
-}
-
 a {
-  color: rgb(211, 222, 226);
+  color: black;
 }
 
 figure{
@@ -127,4 +136,34 @@ margin-right: 15px;
 
 .form-upload-width{
   width: 30%
+}
+
+.img-bus{
+  // width: 200px;
+  // height: 300px;
+  width: 20%
+}
+
+.flex{
+  flex-wrap: wrap
+}
+
+.row{
+  p{
+    text-shadow: 0 0
+  }
+}
+
+hr{
+  color: rgb(56, 54, 54);
+  height: 5px;
+}
+
+.bord{
+  border-bottom: 2px solid
+}
+
+p a{
+  color: white;
+  text-shadow: 2px 2px 0 rgba(61, 61, 61, 0.4)
 }
