@@ -9,8 +9,8 @@ window.onload = () => {
     });
 
     searchBtn.onclick = () => {
-        const city = document.getElementById("place-input").value
-        const business = document.getElementById('select-option').value
+  //   const city = document.getElementById("place-input").value
+  //   const business = document.getElementById('select-option').value
        
         axios.get('https://viahappy.herokuapp.com/auth/api/search', { params: { city, business } })
 
@@ -34,7 +34,7 @@ window.onload = () => {
 
                     });
                 });
-
+  //              console.log(googleApi)
                 let names = extractNames(response.data)
                 
                 let markerCluster = new MarkerClusterer(map, markers,

@@ -62,8 +62,11 @@ hbs.registerHelper('ifUndefined', (value, options) => {
 
 // default value for title local
 app.locals.title = 'Express - Generated with IronGenerator';
+
 app.locals.googleApi = process.env.GOOGLE_API;
 
+console.log('app.locals.googleApi: ', app.locals.googleApi)
+console.log('process.env.GOOGLE_API: ', process.env.GOOGLE_API)
 
 
 
